@@ -1,0 +1,47 @@
+{
+  "hostname": "R5-PE",
+  "ldp_id": "loopback0",
+  "router_id": "5.5.5.5",
+  "loopbacks": [
+    {
+      "id": "loopback0",
+      "desc": "RouterID and MGMT Interface",
+      "ipv4_address": "5.5.5.5",
+      "ospfv2": {
+        "pid": 1,
+        "network_type": "point-to-point",
+        "area_id": 0
+      }
+    }
+  ],
+  "interfaces": [
+    {
+      "id": "GigabitEthernet1",
+      "desc": "Link to R1-CORE",
+      "ipv4_address": "172.1.5.2",
+      "ipv4_netmask": "255.255.255.252",
+      "mtu": "9000",
+      "bandwidth": "50",
+      "ldp_enabled": true,
+      "ospfv2": {
+        "pid": 1,
+        "network_type": "point-to-point",
+        "area_id": 0
+      }
+    },
+    {
+      "id": "GigabitEthernet2",
+      "desc": "Link to R2-CORE",
+      "ipv4_address": "172.2.5.2",
+      "ipv4_netmask": "255.255.255.252",
+      "mtu": "9000",
+      "bandwidth": "100",
+      "ldp_enabled": true,
+      "ospfv2": {
+        "pid": 1,
+        "network_type": "point-to-point",
+        "area_id": 0
+      }
+    }
+  ]
+}

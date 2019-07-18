@@ -1,0 +1,46 @@
+config t
+hostname R4-PE
+!
+no ip domain-lookup
+!
+mpls ldp router-id loopback0 force
+!
+interface loopback0
+ description Management Uplink
+ ip address 4.4.4.4 255.255.255.255
+ ip ospf network point-to-point
+ ip ospf 1 area 0
+!
+!
+interface GigabitEthernet1
+ ip address 172.1.4.2 255.255.255.252
+ description Link to R1-CORE
+ bandwidth 100000
+ mtu 9000
+ no shutdown
+ negotiation auto
+ no mop enabled
+ no mop sysid
+ mpls ip
+ ip ospf network point-to-point
+ ip ospf 1 area 0
+!
+interface GigabitEthernet2
+ ip address 172.2.4.2 255.255.255.252
+ description Link to R2-CORE
+ bandwidth 100000
+ mtu 9000
+ no shutdown
+ negotiation auto
+ no mop enabled
+ no mop sysid
+ mpls ip
+ ip ospf network point-to-point
+ ip ospf 1 area 0
+!
+line con 0
+ exec-timeout 0 0
+ logging synchronous
+
+end
+wr

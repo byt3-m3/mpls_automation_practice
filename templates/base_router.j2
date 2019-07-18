@@ -1,0 +1,33 @@
+config t
+hostname {{ node.hostname }}
+!
+no ip domain-lookup
+!
+{% if node.ldp_id %}mpls ldp router-id {{ node.ldp_id }} force{% endif %}
+!{% for loopback in node.loopbacks %}
+interface {{ loopback.id }}
+ description Management Uplink
+ ip address {{ loopback.ipv4_address }} 255.255.255.255{% if loopback.ospfv2 %}
+ ip ospf network {{ loopback.ospfv2.network_type }}
+ ip ospf {{ loopback.ospfv2.pid }} area {{ loopback.ospfv2.area_id }}{% endif %}
+!{% endfor %}{% for link in node.interfaces %}
+!
+interface {{ link.id }}
+ ip address {{ link.ipv4_address }} {{ link.ipv4_netmask }}
+ description {{ link.desc }}
+ bandwidth {{ link.bandwidth }}000
+ mtu {{ link.mtu }}
+ no shutdown
+ negotiation auto
+ no mop enabled
+ no mop sysid
+{% if link.ldp_enabled %} mpls ip{% endif %}{% if link.ospfv2 %}
+ ip ospf network {{ link.ospfv2.network_type }}
+ ip ospf {{ link.ospfv2.pid }} area {{ link.ospfv2.area_id }}{% endif %}{% endfor %}
+!
+line con 0
+ exec-timeout 0 0
+ logging synchronous
+
+end
+wr

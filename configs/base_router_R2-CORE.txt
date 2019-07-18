@@ -1,0 +1,85 @@
+config t
+hostname R2-CORE
+!
+no ip domain-lookup
+!
+mpls ldp router-id loopback0 force
+!
+interface loopback0
+ description Management Uplink
+ ip address 2.2.2.2 255.255.255.255
+ ip ospf network point-to-point
+ ip ospf 1 area 0
+!
+!
+interface GigabitEthernet1
+ ip address 172.1.2.2 255.255.255.252
+ description Link to R1-CORE
+ bandwidth 100000
+ mtu 9000
+ no shutdown
+ negotiation auto
+ no mop enabled
+ no mop sysid
+ mpls ip
+ ip ospf network point-to-point
+ ip ospf 1 area 0
+!
+interface GigabitEthernet2
+ ip address 172.2.3.1 255.255.255.252
+ description Link to R3-PE
+ bandwidth 50000
+ mtu 9000
+ no shutdown
+ negotiation auto
+ no mop enabled
+ no mop sysid
+ mpls ip
+ ip ospf network point-to-point
+ ip ospf 1 area 0
+!
+interface GigabitEthernet3
+ ip address 172.2.4.1 255.255.255.252
+ description Link to R4-PE
+ bandwidth 100000
+ mtu 9000
+ no shutdown
+ negotiation auto
+ no mop enabled
+ no mop sysid
+ mpls ip
+ ip ospf network point-to-point
+ ip ospf 1 area 0
+!
+interface GigabitEthernet4
+ ip address 172.2.5.1 255.255.255.252
+ description Link to R5-PE
+ bandwidth 100000
+ mtu 9000
+ no shutdown
+ negotiation auto
+ no mop enabled
+ no mop sysid
+ mpls ip
+ ip ospf network point-to-point
+ ip ospf 1 area 0
+!
+interface GigabitEthernet5
+ ip address 172.2.6.1 255.255.255.252
+ description Link to R6-PE
+ bandwidth 100000
+ mtu 9000
+ no shutdown
+ negotiation auto
+ no mop enabled
+ no mop sysid
+ mpls ip
+ ip ospf network point-to-point
+ ip ospf 1 area 0
+!
+line con 0
+ exec-timeout 0 0
+ logging synchronous
+
+end
+wr

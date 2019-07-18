@@ -1,0 +1,89 @@
+{
+  "hostname": "R1-CORE",
+  "ldp_id": "loopback0",
+  "router_id": "1.1.1.1",
+  "loopbacks": [
+    {
+      "id": "loopback0",
+      "desc": "RouterID and MGMT Interface",
+      "ipv4_address": "1.1.1.1",
+      "ospfv2": {
+        "pid": 1,
+        "network_type": "point-to-point",
+        "area_id": 0
+      }
+    }
+  ],
+  "interfaces": [
+    {
+      "id": "GigabitEthernet1",
+      "desc": "Link to R2-CORE",
+      "ipv4_address": "172.1.2.1",
+      "ipv4_netmask": "255.255.255.252",
+      "mtu": "9000",
+      "bandwidth": "100",
+      "ldp_enabled": true,
+      "ospfv2": {
+        "pid": 1,
+        "network_type": "point-to-point",
+        "area_id": 0
+      }
+    },
+    {
+      "id": "GigabitEthernet2",
+      "desc": "Link to R3-PE",
+      "ipv4_address": "172.1.3.1",
+      "ipv4_netmask": "255.255.255.252",
+      "mtu": "9000",
+      "bandwidth": "100",
+      "ldp_enabled": true,
+      "ospfv2": {
+        "pid": 1,
+        "network_type": "point-to-point",
+        "area_id": 0
+      }
+    },
+    {
+      "id": "GigabitEthernet3",
+      "desc": "Link to R4-PE",
+      "ipv4_address": "172.1.4.1",
+      "ipv4_netmask": "255.255.255.252",
+      "mtu": "9000",
+      "bandwidth": "100",
+      "ldp_enabled": true,
+      "ospfv2": {
+        "pid": 1,
+        "network_type": "point-to-point",
+        "area_id": 0
+      }
+    },
+    {
+      "id": "GigabitEthernet4",
+      "desc": "Link to R5-PE",
+      "ipv4_address": "172.1.5.1",
+      "ipv4_netmask": "255.255.255.252",
+      "mtu": "9000",
+      "bandwidth": "50",
+      "ldp_enabled": true,
+      "ospfv2": {
+        "pid": 1,
+        "network_type": "point-to-point",
+        "area_id": 0
+      }
+    },
+    {
+      "id": "GigabitEthernet5",
+      "desc": "Link to R6-PE",
+      "ipv4_address": "172.1.6.1",
+      "ipv4_netmask": "255.255.255.252",
+      "mtu": "9000",
+      "bandwidth": "50",
+      "ldp_enabled": true,
+      "ospfv2": {
+        "pid": 1,
+        "network_type": "point-to-point",
+        "area_id": 0
+      }
+    }
+  ]
+}
