@@ -1,0 +1,38 @@
+#### Config for {{ sp.pe_router }} ####
+enable
+config t
+!
+vrf definition {{ sp.service_id }}
+ description VPNv4 ServiceProfile for {{ sp.customer_name }}
+ rd {{ sp.bgp_as }}:{{ sp.customer_id }}
+ route-target export {{ sp.bgp_as }}:{{ sp.customer_id }}
+ route-target import {{ sp.bgp_as }}:{{ sp.customer_id }}
+ !
+ address-family ipv4
+exit-address-family
+
+interface {{ sp.downlink.id }}
+ vrf forwarding {{ sp.service_id }}
+ ip address {{ sp.downlink.ipv4_address }} {{ sp.downlink.ipv4_netmask }}
+ description {{ sp.downlink.desc }}
+ bandwidth {{ sp.downlink.bandwidth }}000
+ mtu {{ sp.downlink.mtu }}
+ no shutdown
+ negotiation auto
+ no mop enabled
+ no mop sysid
+
+
+#### Config for {{ sp.customer_name }} CE Router ####
+enable
+config t
+!
+interface {{ sp.uplink.id }}
+ ip address {{ sp.uplink.ipv4_address }} {{ sp.uplink.ipv4_netmask }}
+ description {{ sp.uplink.desc }}
+ bandwidth {{ sp.uplink.bandwidth }}000
+ mtu {{ sp.uplink.mtu }}
+ no shutdown
+ negotiation auto
+ no mop enabled
+ no mop sysid
