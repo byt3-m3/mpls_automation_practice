@@ -44,5 +44,33 @@
       }
     }
   ],
-  "bgp_as": "65000"
+  "bgp": {
+    "asn": 65001,
+    "ipv4_default_originate": false,
+    "policies": [
+      {
+        "": ""
+      }
+    ],
+    "sessions": [
+      {
+        "peer_address": "",
+        "remote_as": 0,
+        "password": "",
+        "peer_session": "",
+        "peer_policy": "",
+        "ipv4_enabled": true,
+        "ipv4_networks": [
+          {
+            "network_id": "",
+            "netmask": "",
+            "route_map": ""
+          }
+        ],
+        "vpnv4_enabled": true,
+        "ipv6_enabled": false,
+        "ipv4_labled_unicast_enabled": false
+      }
+    ]
+  }
 }

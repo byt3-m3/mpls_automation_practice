@@ -1,0 +1,18 @@
+router bgp {{ policy.bgp_asn }}
+template peer-policy {{ policy.policy_name }}
+{% if policy.allowas_in %} allowas-in {{ policy.allowas_in }}{% endif %}
+{% if policy.as_override %} as-override{% endif %}
+{% if policy.as_override_split_horizon %} as-override split-horizon{% endif %}
+{% if policy.next_hop_self %} next-hop-self{% endif %}
+{% if policy.next_hop_self_all %} next-hop-self all{% endif %}
+{% if policy.route_reflector_client %} route_reflector_client{% endif %}
+{% if policy.route_map_in %} route_map {{ policy.route_map_in }} in{% endif %}
+{% if policy.route_map_out %} route_map {{ policy.route_map_out }} out{% endif %}
+{% if policy.send_label %} send-label{% endif %}
+{% if policy.send_label_explicit_null %} send-label explicit-null{% endif %}
+{% if policy.prefix_list_in %} prefix-list {{ policy.prefix_list_in }} in{% endif %}
+{% if policy.weight %} weight {{ policy.weight }} out{% endif %}
+{% if policy.soft_reconfiguration  %} soft-reconfiguration inbound{% endif %}
+{% if policy.next_hop_unchanged  %} next-hop-unchanged{% endif %}
+{% if policy.next_hop_unchanged_allpaths  %} next-hop-unchanged allpaths{% endif %}
+{% if policy.maximum_prefix  %} maximum-prefix {{ policy.maximum_prefix }}{% endif %}

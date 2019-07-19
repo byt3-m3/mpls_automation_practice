@@ -1,0 +1,13 @@
+template peer-session {{ session.policy_name }}
+{% if session.description %} description {{ session.description }}{% endif %}
+{% if session.password %} password {{ session.password }}{% endif %}
+{% if session.timers %} timers {{ session.timers }}{% endif %}
+{% if session.shutdown_graceful %} shutdown{% endif %}
+{% if session.shutdown_graceful %} shutdown graceful {{ session.shutdown_graceful }}{% endif %}
+{% if session.disable_connected_check %} disable-connected-check{{ session.disable_connected_check }}{% endif %}
+{% if session.ebgp_multihop %} ebgp-multihop {{ session.ebgp_multihop }}{% endif %}
+{% if session.remote_as %} remote-as {{ session.remote_as }}{% endif %}
+{% if session.update_source %} remote-as {{ session.update_source }}{% endif %}
+{% if session.ttl_security %} ttl-security hops {{ session.ttl_security }}{% endif %}
+{% if session.log_neighbor_changes == True %} log-neighbor-changes {{ session.log_neighbor_changes }}{% endif %}
+{% if session.log_neighbor_changes == False %} log-neighbor-changes disable{{ session.log_neighbor_changes }}{% endif %}

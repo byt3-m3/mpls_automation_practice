@@ -1,0 +1,7 @@
+{
+  "policy_name": "VPNV4_POLICY",
+  "bgp_asn": 65001,
+  "send_label": true,
+  "maximum_prefix": 100,
+  "next_hop_unchanged": true
+}

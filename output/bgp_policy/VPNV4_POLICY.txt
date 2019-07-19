@@ -1,0 +1,5 @@
+router bgp 65001
+template peer-policy VPNV4_POLICY
+ send-label
+ next-hop-unchanged
+ maximum-prefix 100

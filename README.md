@@ -1,51 +1,51 @@
-# Cisco Segment Routing Lab
+# Presto Configuration Generator
 
-This lab is designed demonstrate the use of Python and Jinja2 templates. 
+This tool is designed to generate Cisco style configurations.This tool is aimed to aide in the agility when labeling or
+simulating high level networks. 
 
-![alt text](./Capture.PNG)
 
-## Topology Info
-- Nodes
-    - 6 Cisco CSR 1000vs - Cisco IOS XE Software, Version 16.03.02
-    - 8 Cisco IOL  - Cisco IOS Software, Linux Software (I86BI_LINUX-ADVENTERPRISEK9-M), Version 15.2(4)M1
-    
-    ### Methods and Schemas
-    - method: base_router
-        - Schema:
-            ```json
-             {
-              "hostname": "R3-PE",
-              "ldp_id": "loopback0",
-              "router_id": "3.3.3.3",
-              "loopbacks": [
-                {
-                  "id": "loopback0",
-                  "desc": "RouterID and MGMT Interface",
-                  "ipv4_address": "3.3.3.3",
-                  "ospfv2": {
-                    "pid": 1,
-                    "network_type": "point-to-point",
-                    "area_id": 0
-                  }
-                }
-              ],
-              "interfaces": [
-                {
-                  "id": "GigabitEthernet1",
-                  "desc": "Link to R1-CORE",
-                  "ipv4_address": "172.1.3.2",
-                  "ipv4_netmask": "255.255.255.252",
-                  "mtu": "9000",
-                  "bandwidth": "100",
-                  "ldp_enabled": true,
-                  "ospfv2": {
-                    "pid": 1,
-                    "network_type": "point-to-point",
-                    "area_id": 0
-                  }
-                }
-              ],
-              "bgp_as": "65000"
-              }
+## Schemas
+base_router schema.
+```python
+from schema import Use, Schema, Optional
+from app.models.interface import InterfaceSchema
 
-            ```
+NodeSchema = Schema(
+    {
+        "hostname": str,
+        "router_id": str,
+        Optional("ldp_id"): str,
+        Optional("loopbacks"): list,
+        Optional("interfaces"): lambda x: [InterfaceSchema.validate(interface) for interface in x],
+
+    }
+)
+```
+
+BGP Peer Policy Schama
+### Method : -m bgp_policy
+```python
+from schema import Optional, Schema
+
+BGPPeerPolicySchema = Schema({
+    "policy_name": str,
+    "bgp_asn": int,
+    Optional("allowas_in"): lambda x: x <= 10,
+    Optional("as_override"): bool,
+    Optional("as_override_split_horizon"): bool,
+    Optional("next_hop_self"): bool,
+    Optional("next_hop_self_all"): bool,
+    Optional("next_hop_unchanged"): bool,
+    Optional("next_hop_unchanged_allpaths"): bool,
+    Optional("route_reflector_client"): bool,
+    Optional("route_map_in"): str,
+    Optional("route_map_out"): str,
+    Optional("send_label"): bool,
+    Optional("send_label_explicit_null"): bool,
+    Optional("prefix_list_in"): str,
+    Optional("prefix_list_out"): str,
+    Optional("weight"): lambda x: x <= 65535,
+    Optional("soft_reconfiguration"): bool,
+    Optional("maximum_prefix"): lambda x: int(x) <= 2147483647,
+})
+```
