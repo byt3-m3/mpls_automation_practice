@@ -1,0 +1,29 @@
+config t
+hostname R1-BITS
+!
+no ip domain-lookup
+!
+mpls ldp router-id loopback0 force
+!
+interface loopback0
+ description Management Uplink
+ ip address 1.1.1.1 255.255.255.255
+!
+!
+interface Ethernet0/0
+ ip address 155.1.3.1 255.255.255.252
+ description Link to R3-PE
+ bandwidth 20000
+ mtu 9000
+ no shutdown
+ negotiation auto
+ no mop enabled
+ no mop sysid
+ mpls ip
+!
+line con 0
+ exec-timeout 0 0
+ logging synchronous
+
+end
+wr
